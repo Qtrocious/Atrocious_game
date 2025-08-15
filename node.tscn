@@ -1,5 +1,169 @@
-[gd_scene format=3 uid="uid://osgq4fw74xt3"]
+[gd_scene load_steps=13 format=4 uid="uid://osgq4fw74xt3"]
+
+[ext_resource type="Script" uid="uid://cqwm424hxvwyg" path="res://player.gd" id="1_112p8"]
+[ext_resource type="Texture2D" uid="uid://du4jgaewcog7d" path="res://assets/DEXTER.png" id="2_e2u21"]
+[ext_resource type="Texture2D" uid="uid://dgh7pfadully2" path="res://assets/Tileset.png" id="3_bss38"]
+[ext_resource type="Script" uid="uid://678dend76jgn" path="res://sprite_2d.gd" id="3_tda05"]
+[ext_resource type="Script" uid="uid://o01va0nhn51j" path="res://tonight's_the_night.gd" id="5_bss38"]
+
+[sub_resource type="Animation" id="Animation_l6pdb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qn3nj"]
+resource_name = "all_anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r657h"]
+_data = {
+&"RESET": SubResource("Animation_l6pdb"),
+&"all_anim": SubResource("Animation_qn3nj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tda05"]
+size = Vector2(116, 148)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2u21"]
+texture = ExtResource("3_bss38")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_bss38"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_e2u21")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bss38"]
+size = Vector2(142, 17)
 
 [node name="Node" type="Node"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_112p8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(60, -154)
+scale = Vector2(4, 4)
+texture = ExtResource("2_e2u21")
+hframes = 2
+script = ExtResource("3_tda05")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_r657h")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(62, -154)
+shape = SubResource("RectangleShape2D_tda05")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(62, -154)
+scale = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+drag_horizontal_enabled = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQACAAAAAAAFAP//AQACAAAAAAAGAP//AQACAAAAAAAJAP//AQAAAAAAAAAKAP//AQAAAAAAAAALAP//AQAAAAAAAAANAP7/AQAAAAAAAAAOAP7/AQAAAAAAAAAPAP7/AQAAAAAAAAARAP3/AQAAAAAAAAAUAP3/AQAAAAAAAAAYAP7/AQAAAAAAAAAZAP7/AQAAAAAAAAAeAP3/AQAAAAAAAAAeAAMAAQAAAAAAAAAeAAQAAQAAAAAAAAAdAAQAAQAAAAAAAAAcAAQAAQAAAAAAAAARAAUAAQAAAAAAAAAQAAUAAQAAAAAAAAAPAAUAAQAAAAAAAAAOAAUAAQAAAAAAAAAeAAIAAQABAAAAAAAeAAEAAQABAAAAAAAeAPz/AQABAAAAAAAeAPv/AQABAAAAAAAcAAkAAQABAAAAAAAdAAkAAQABAAAAAAAeAAkAAQABAAAAAAAgAAgAAQABAAAAAAAhAAgAAQABAAAAAAAkAAcAAQABAAAAAAAmAAYAAQABAAAAAAAnAAUAAQABAAAAAAAlAAcAAQACAAMAAAAiAAgAAQACAAMAAAAfAAEAAQACAAMAAAAhAAQAAQAAAAIAAAAiAAQAAQAAAAIAAAAgAAMAAQAAAAIAAAAhAAMAAQAAAAIAAAAgAAIAAQAAAAIAAAAjAAQAAQAAAAIAAAATAPr/AQAAAAIAAAAUAPr/AQAAAAIAAAAVAPr/AQAAAAIAAAAWAPr/AQAAAAIAAAASAAoAAQAAAAMAAAATAAoAAQAAAAMAAAAUAAoAAQAAAAMAAAAVAAoAAQAAAAMAAAAWAAoAAQAAAAMAAAAXAAoAAQAAAAMAAAAYAAoAAQAAAAMAAAAZAAoAAQAAAAMAAAAaAAoAAQAAAAMAAAAbAAMAAQAAAAMAAAAaAAIAAQAAAAMAAAAZAAIAAQAAAAMAAAAYAAIAAQAAAAMAAAAXAAIAAQAAAAMAAAAWAAEAAQAAAAMAAAA=")
+tile_set = SubResource("TileSet_bss38")
+
+[node name="Tonight\'s the night" type="Area2D" parent="."]
+script = ExtResource("5_bss38")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tonight\'s the night"]
+position = Vector2(1402, 220)
+shape = SubResource("RectangleShape2D_bss38")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Tonight\'s the night"]
+position = Vector2(511, 150.5)
+shape = SubResource("RectangleShape2D_bss38")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = -1
+anchor_left = 1.128
+anchor_top = 0.197
+anchor_right = 1.128
+anchor_bottom = 0.197
+offset_left = 21.5439
+offset_top = -38.656
+offset_right = 203.544
+offset_bottom = 11.344
+text = "Be your true self...
+	- The Dark Passenger"
+fit_content = true
+scroll_active = false
+tab_size = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+anchors_preset = -1
+anchor_left = 1.128
+anchor_top = 0.197
+anchor_right = 1.128
+anchor_bottom = 0.197
+offset_left = -753.456
+offset_top = -141.656
+offset_right = -591.456
+offset_bottom = -118.656
+text = "Connected by light..."
+fit_content = true
+scroll_active = false
+tab_size = 2
+
+[connection signal="body_entered" from="Tonight\'s the night" to="Player" method="_on_tonights_the_night_body_entered"]
